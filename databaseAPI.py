@@ -14,6 +14,11 @@ class Worker:
     designProjectTable = Airtable('appytOreQAh0kwjlt', "Design projects", "key1B3UuMtQpUkWQS")
 
 
+@app.route("/")
+def index():
+    """Present some documentation"""
+    return "<h2>Add API documentation here !!</h2>"
+
 @app.route("/recommendation_from_ml")
 def recommendation_from_ml(text, title):
     pass
@@ -32,7 +37,8 @@ def make_attachment(url):
     return [{'url': url}]
 
 
-@app.route("/post_journal/username=<string:username>&userID=<int:userID>&date=<string:date>&title=<string:title>&journalText=<string:journalText>&journalImage=<string:journalImage>")
+@app.route(
+    "/post_journal/username=<string:username>&userID=<int:userID>&date=<string:date>&title=<string:title>&journalText=<string:journalText>&journalImage=<string:journalImage>")
 def post_journal(userID, username, date, title, journalText, journalImage):
     # Todo- get mood from backend
     if Worker.isAuth:
