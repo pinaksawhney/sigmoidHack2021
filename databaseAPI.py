@@ -49,7 +49,7 @@ def post_journal():
     title = request.json['title']
     date = request.json['date']
     username = request.json['username']
-    userID = request.json['userID']
+    userID = 5
     journalText = request.json['journalText']
     journalImage = request.json['journalImage']
 
