@@ -42,6 +42,7 @@ def upload_to_s3(filename):
 def make_attachment(url):
     return [{'url': url}]
 
+
 @app.route("/post_journal/", methods=['POST'])
 def post_journal():
     # Todo- get mood from backend
