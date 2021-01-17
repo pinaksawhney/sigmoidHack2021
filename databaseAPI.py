@@ -19,9 +19,15 @@ def index():
     """Present some documentation"""
     return "<h2>Add API documentation here !!</h2>"
 
-@app.route("/recommendation_from_ml")
-def recommendation_from_ml(text, title):
-    pass
+
+@app.route("/recommendation_from_ml/JournalText=<string:JournalText>&Title=<string:Title>")
+def recommendation_from_ml(JournalText, Title):
+    # ToDo - recommendation system based on text and title
+    return {'Activities': ['Hiking', 'Basketball', 'Swimming', 'Workout'], 'Groups':
+        ['Travel and Tourism', 'Sports and Recreation', 'Gym and Fitness'], 'Resources':
+                ['World Health organization https://www.who.int/health-topics/mental-health#tab=tab_1',
+                 'CDC https://www.cdc.gov/mentalhealth/index.htm',
+                 'Psychological health https://www.mentalhealth.gov/basics/what-is-mental-health']}
 
 
 def mood_from_ml(text, title):
