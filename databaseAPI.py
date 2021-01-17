@@ -2,7 +2,7 @@ import boto3
 import base64
 import json
 from airtable import Airtable
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -42,11 +42,17 @@ def upload_to_s3(filename):
 def make_attachment(url):
     return [{'url': url}]
 
-
-@app.route(
-    "/post_journal/username=<string:username>&userID=<int:userID>&date=<string:date>&title=<string:title>&journalText=<string:journalText>&journalImage=<string:journalImage>")
-def post_journal(userID, username, date, title, journalText, journalImage):
+#"/post_journal/username=<string:username>&userID=<int:userID>&date=<string:date>&title=<string:title>&journalText=<string:journalText>&journalImage=<string:journalImage>")
+@app.route("/post_journal/", methods=['POST'])
+def post_journal():
     # Todo- get mood from backend
+    title = request.json['title']
+    date = request.json['date']
+    username = request.json['username']
+    userID = request.json['userID']
+    journalText = request.json['journalText']
+    journalImage = request.json['journalImage']
+
     if Worker.isAuth:
         filename = ""
         if journalImage:
@@ -61,6 +67,8 @@ def post_journal(userID, username, date, title, journalText, journalImage):
         Worker.designProjectTable.insert({"UserID": userID, "UserName": username, "Date": date, "Title": title,
                                           "JournalText": journalText, "JournalImage": make_attachment(url),
                                           "Mood": mood})
+        return {"Success": True}
+    return {"Success": False}
 
 
 @app.route("/get_all_journals/username=<string:username>")
@@ -69,7 +77,13 @@ def get_all_journals(username):
     if Worker.isAuth:
         records = Worker.designProjectTable.search('UserName', str(username))
         for r in records:
-            all_journals.append(r["fields"])
+            img = ""
+            if "JournalImage" in r["fields"].keys():
+                img = r["fields"]["JournalImage"][0]["url"]
+            curr = {"JournalID": r["fields"]["JournalID"], "Mood": r["fields"]["Mood"], "UserID": r["fields"]["UserID"],
+                    "Title": r["fields"]["Title"], "UserName": r["fields"]["UserName"], "JournalImage": img,
+                    "JournalText": r["fields"]["JournalText"], "Date": r["fields"]["Date"]}
+            all_journals.append(curr)
     return json.dumps(all_journals)
 
 
