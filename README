@@ -1,0 +1,36 @@
+1. get_all_journals: input : usename 
+		     output: list of jsons of all the journal enteries
+			e.g. [{u'UserName': u'kanip', u'Mood': 0, u'Title': u'sad day today', u'JournalID': 2, u'UserID': 2, u'Date': u'2021-01-14', u'JournalText': u'no big green tree today'}]
+
+
+2. get_single_journal: input : journalID <int>
+		       output: json with specific journalID entery
+		       e.g. {u'UserName': u'kanip', u'Mood': 0, u'Title': u'sad day today', u'JournalID': 2, u'UserID': 2, u'Date': u'2021-01-14', u'JournalText': u'no big green tree today'}
+
+3. post_journal: input :  userID
+			  username
+			  date
+			  title
+			  journalText
+			  journalImage
+
+		 output: if success {"Success": True} else success {"Success": False}
+
+4. post_login: input : username
+		       password
+	       output: if success {"Success": True} else success {"Success": False}
+
+
+5. post_signup: input : username
+			password
+		Output : None
+
+6. post_deleteAccount: username
+		       password
+		output: None
+
+7. recommendation_from_ml : input : JournalText
+				    Title
+			    output: {'Activities': ['act-1', act-2, act-3], 'Groups': [Gr-1, Gr-2, Gr-3], 'Resources': ['who','cdc','wmh']}
+
+
