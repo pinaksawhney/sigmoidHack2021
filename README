@@ -1,6 +1,6 @@
 Complete Project: https://devpost.com/software/moody-5romwl
 
-##API
+APIs
 
 1. get_all_journals: input : usename 
 		     output: list of jsons of all the journal enteries
