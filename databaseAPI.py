@@ -4,6 +4,8 @@ import json
 from airtable import Airtable
 from textblob import TextBlob
 from flask import Flask, request
+from random import randrange
+
 
 app = Flask(__name__)
 
@@ -50,7 +52,6 @@ def make_attachment(url):
 
 @app.route("/post_journal/", methods=['POST'])
 def post_journal():
-    # Todo- get mood from backend
     title = request.json['title']
     date = request.json['date']
     username = request.json['username']
@@ -62,7 +63,7 @@ def post_journal():
         filename = ""
         if journalImage:
             imgData = base64.b64decode(journalImage)
-            filename = username + str(Worker.unique) + ".jpg"
+            filename = username + str(Worker.unique) + str(randrange(1000000)) + ".jpg"
             Worker.unique += 1
             with open(filename, 'wb') as f:
                 f.write(imgData)
