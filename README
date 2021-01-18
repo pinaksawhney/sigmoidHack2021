@@ -1,3 +1,7 @@
+Complete Project: https://devpost.com/software/moody-5romwl
+
+APIs
+
 1. get_all_journals: input : usename 
 		     output: list of jsons of all the journal enteries
 			e.g. [{u'UserName': u'kanip', u'Mood': 0, u'Title': u'sad day today', u'JournalID': 2, u'UserID': 2, u'Date': u'2021-01-14', u'JournalText': u'no big green tree today'}]
