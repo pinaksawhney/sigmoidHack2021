@@ -2,6 +2,7 @@ import boto3
 import base64
 import json
 from airtable import Airtable
+from textblob import TextBlob
 from flask import Flask, request
 
 app = Flask(__name__)
@@ -31,7 +32,11 @@ def recommendation_from_ml(JournalText, Title):
 
 
 def mood_from_ml(text, title):
-    return 0
+    document = text + " " + title
+    blob = TextBlob(document)
+    old_value = blob.polarity
+    new_value = round((((old_value + 1) * 12) / 2))
+    return new_value
 
 
 def upload_to_s3(filename):

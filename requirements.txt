@@ -1,3 +1,4 @@
+textblob==0.8.4
 airtable
 flask
 airtable-python-wrapper==0.13.0
